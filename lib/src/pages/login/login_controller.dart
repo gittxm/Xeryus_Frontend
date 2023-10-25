@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:xyrusflutter/src/models/Contratos.dart';
+import 'package:xyrusflutter/src/models/Estados.dart';
+import 'package:xyrusflutter/src/models/Extensiones.dart';
 
 import '../../models/Users.dart';
 import '../../models/Restriccion.dart';
@@ -16,7 +18,7 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
 
   UsersProvider usersProvider = UsersProvider();
-  //---
+//---
 
   void goToRegisterPage() {
     Get.toNamed('/register');
@@ -101,34 +103,33 @@ class LoginController extends GetxController {
       } else {
         Get.snackbar('Login fallido u', responseApiU.message ?? '');
       }
+      //
     }
   }
-}
 
-void goToHomePage() {
-  Get.offNamedUntil('/client/extension', (route) => false);
-}
-
-void goToLoginPage() {
-  Get.offNamedUntil('/login2', (route) => false);
-}
-
-bool isValidForm(String user, String password) {
-  if (user.isEmpty || password.isEmpty) {
-    Get.snackbar('Formulario no valido', 'Debe ingresa el numero');
-    return false;
+  void goToHomePage() {
+    Get.offNamedUntil('/client/extension', (route) => false);
   }
 
-  return true;
-}
-
-bool isValidFormU(String numero) {
-  if (numero.isEmpty) {
-    Get.snackbar('Formulario no valido', 'Debe ingresa el numero');
-    return false;
+  void goToLoginPage() {
+    Get.offNamedUntil('/login2', (route) => false);
   }
 
-  return true;
-}
+  bool isValidForm(String user, String password) {
+    if (user.isEmpty || password.isEmpty) {
+      Get.snackbar('Formulario no valido', 'Debe ingresa el numero');
+      return false;
+    }
 
-//se dee completar la autentificacion de el  numero de contrato  por parte del front
+    return true;
+  }
+
+  bool isValidFormU(String numero) {
+    if (numero.isEmpty) {
+      Get.snackbar('Formulario no valido', 'Debe ingresa el numero');
+      return false;
+    }
+
+    return true;
+  }
+}

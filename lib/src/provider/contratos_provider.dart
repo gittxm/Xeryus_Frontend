@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:xyrusflutter/src/enviroment/enviroment.dart';
 import 'package:xyrusflutter/src/models/Contratos.dart';
+import 'package:xyrusflutter/src/models/Estados.dart';
 import 'package:xyrusflutter/src/models/Extensiones.dart';
 
 import '../models/response_api.dart';
@@ -85,11 +90,27 @@ class UsersProvider extends GetConnect {
     return responseApi;
   }
 
+  Future<Estado> selectAll(String estado, String Activo) async {
+    Response response = await get('$url3/api/users/selectall', headers: {
+      'Content-Type': 'application/json'
+    }); // ESPERAR HASTA QUE EL SERVIDOR NOS RETORNE LA RESPUESTA
+    if (response.statusCode == 200) {
+      Get.snackbar('200', 'Actualizada');
+      return Estado.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+    } else {
+      //restApi
+      Estado responseApi = Estado.fromJson(response.body);
+      Get.snackbar('Error', 'No encontrada');
+      print(response.body);
+      return responseApi;
+    }
+  }
+
   //////
   Future<ResponseApi> update(String urls, String estado, String id) async {
-    Response response = await put('$url3/api/users/update', {
-      'EstadoExtension': estado,
-      'id': id,
+    Response response = await post('$url3/api/users/estados_mod', {
+      "ext": "1011",
+      "estado": 4,
       'urls': urls
     }, headers: {
       'Content-Type': 'application/json'

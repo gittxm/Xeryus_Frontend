@@ -174,25 +174,31 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
+
   String _btn1SelectedVal = con.estado1;
 
   Widget scroll(BuildContext context) {
     return Container(
-        child: ListTile(
-      title: const Text('Estado Extension'),
-      trailing: DropdownButton<Item>(
-        // Must be one of items.value.
-        /// agregar el icono actual con getx .value
-        //     value: ,
-        onChanged: (Item? newValue) {
-          if (newValue != null) {
-            setState(
-              () => con.estado1 = newValue.name,
-            );
-          }
-        },
-        items: this._dropDownMenuItems,
+      child: ListTile(
+        title: const Text('Estado Extension'),
+        trailing: DropdownButton<Item>(
+            // Must be one of items.value.
+            /// agregar el icono actual con getx .value
+            //     value: ,
+            onChanged: (Item? newValue) {
+              if (newValue != null) {
+                setState(
+                  () => con.estado1 = newValue.name,
+                );
+                print(con.estado1);
+              }
+            },
+            items: _dropDownMenuItems,
+            value: menuItemsShow.firstWhere(
+              (item) => item.name == con.estado1,
+              orElse: () => menuItemsShow[0],
+            )),
       ),
-    ));
+    );
   }
 }

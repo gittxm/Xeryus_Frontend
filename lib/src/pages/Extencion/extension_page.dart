@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:xyrusflutter/src/pages/Extencion/extension_controller.dart';
 import 'package:xyrusflutter/src/pages/Extencion/profile/info_page_controller.dart';
-
+import 'package:xyrusflutter/src/pages/Extencion/profile/update/prueba datos/estados_controller.dart';
 import 'profile/update/ext_update_controller.dart';
 
 ClientProfileInfoController con = Get.put(ClientProfileInfoController());

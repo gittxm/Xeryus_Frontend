@@ -61,4 +61,6 @@ class ClientProfileInfoController extends GetxController {
 
     Get.offNamedUntil('/', (route) => false);
   }
+
+  responseApi() {}
 }

@@ -8,6 +8,7 @@ import 'package:xyrusflutter/src/pages/Extencion/extension_page.dart';
 import 'package:xyrusflutter/src/pages/login/login_controller.dart';
 import 'package:xyrusflutter/src/pages/login/login_page.dart';
 import 'package:xyrusflutter/src/pages/Extencion/profile/info_page.dart';
+import 'package:xyrusflutter/src/pages/Extencion/profile/update/prueba datos/estados_controller.dart';
 
 import 'src/pages/Extencion/profile/update/ext_update.dart';
 import 'src/pages/Extencion/profile/update/prueba datos/datos.dart';

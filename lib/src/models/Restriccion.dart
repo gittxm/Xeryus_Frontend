@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final restriccion = restriccionFromJson(jsonString);
+// final restriccion = restriccionFromJson(jsonString);
 
 import 'dart:convert';
 

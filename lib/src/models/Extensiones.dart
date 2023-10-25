@@ -9,11 +9,13 @@ class Extension {
   String? estadoExtension;
   String? numeroDestino;
   String? tipoDesvio;
+  dynamic data;
   Extension({
     this.extension,
     this.estadoExtension,
     this.numeroDestino,
     this.tipoDesvio,
+    this.data,
   });
 
   factory Extension.fromJson(Map<String, dynamic> json) => Extension(
@@ -21,6 +23,7 @@ class Extension {
         estadoExtension: json["EstadoExtension"].toString(),
         numeroDestino: json["NumeroDestino"],
         tipoDesvio: json["TipoDesvio"].toString(),
+        data: json["data"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -28,5 +31,6 @@ class Extension {
         "EstadoExtension": estadoExtension,
         "NumeroDestino": numeroDestino,
         "TipoDesvio": tipoDesvio,
+        "data": data,
       };
 }
