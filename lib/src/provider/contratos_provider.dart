@@ -1,12 +1,9 @@
 import 'dart:convert';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'dart:developer';
+import 'dart:io';
+import 'dart:math';
 import 'package:get/get.dart';
 import 'package:xyrusflutter/src/enviroment/enviroment.dart';
-import 'package:xyrusflutter/src/models/Contratos.dart';
-import 'package:xyrusflutter/src/models/Estados.dart';
-import 'package:xyrusflutter/src/models/Extensiones.dart';
 
 import '../models/response_api.dart';
 
@@ -73,6 +70,7 @@ class UsersProvider extends GetConnect {
   }
 
   Future<ResponseApi> extension(String id, String urls) async {
+    print("id" + id);
     Response response = await post('$url3/api/users/extensionD', {
       'id': id,
       'urls': urls
@@ -90,44 +88,47 @@ class UsersProvider extends GetConnect {
     return responseApi;
   }
 
-  Future<Estado> selectAll(String estado, String Activo) async {
-    Response response = await get('$url3/api/users/selectall', headers: {
+  Future<ResponseApi> selectAll(String id, String urls) async {
+    Response response = await post('$url3/api/users/selectall', {
+      'id': id,
+      'urls': urls,
+    }, headers: {
       'Content-Type': 'application/json'
     }); // ESPERAR HASTA QUE EL SERVIDOR NOS RETORNE LA RESPUESTA
-    if (response.statusCode == 200) {
-      Get.snackbar('200', 'Actualizada');
-      return Estado.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+
+    if (response.statusCode != 200) {
+      print('la conexion Api fue exitosa: ${response.body}');
+      return ResponseApi.fromJson(response.body);
     } else {
-      //restApi
-      Estado responseApi = Estado.fromJson(response.body);
-      Get.snackbar('Error', 'No encontrada');
-      print(response.body);
-      return responseApi;
+      Map<String, dynamic> responseBody = jsonDecode(response.body);
+      ResponseApi responsedata = ResponseApi.fromJson(responseBody);
+      print('La conexion Api es fallida: ${responsedata.data}');
+      throw Exception('Error en la solicitud Api: ${responsedata.data}');
     }
   }
 
-  //////
-  Future<ResponseApi> update(String urls, String estado, String id) async {
-    Response response = await post('$url3/api/users/estados_mod', {
-      "ext": "1011",
-      "estado": 4,
-      'urls': urls
+  Future<ResponseApi> UPDATE(String id, String urls, String estado) async {
+    print("id" + id);
+    Response response = await put('$url3/api/users/updateestados', {
+      'extension': id,
+      'estado': estado,
+      'urls': urls,
     }, headers: {
       'Content-Type': 'application/json'
     }); // ESPERAR HASTA QUE EL SERVIDOR NOS RETORNE LA RESPUESTA
 
     if (response.body == null) {
       Get.snackbar('Error', 'No se pudo Actualisar  Estado ');
+      print('error');
       return ResponseApi();
     }
-    //restApi
 
-    ResponseApi responseApi = ResponseApi.fromJson(response.body);
-    return responseApi;
+    ResponseApi responsedata = ResponseApi.fromJson(response.body);
+    return responsedata;
   }
 
 //
-  Future<ResponseApi> updateN(String urls, String Numero, String id) async {
+/*   Future<ResponseApi> updateN(String urls, String Numero, String id) async {
     Response response = await put('$url3/api/users/updateN', {
       'NumeroDestino': Numero,
       'id': id,
@@ -146,11 +147,11 @@ class UsersProvider extends GetConnect {
     ResponseApi responseApi = ResponseApi.fromJson(response.body);
     Get.snackbar('Se actualiso correctamente', 'Actualizado correctamente');
     return responseApi;
-  }
+  } */
 
 //
 
-  Future<ResponseApi> restriccion(String urls, String id) async {
+/*   Future<ResponseApi> restriccion(String urls, String id) async {
     Response response = await post('$url3/api/users/restriccion', {
       'Extension': id,
       'urls': urls
@@ -168,5 +169,5 @@ class UsersProvider extends GetConnect {
     ResponseApi responseApi = ResponseApi.fromJson(response.body);
     Get.snackbar('funciona restriccion', 'funciona restriccion');
     return responseApi;
-  }
+  } */
 }

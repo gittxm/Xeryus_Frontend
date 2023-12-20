@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:xyrusflutter/src/models/Contratos.dart';
-import 'package:xyrusflutter/src/models/Estados.dart';
 import 'package:xyrusflutter/src/models/Extensiones.dart';
 
 import '../../models/Users.dart';
@@ -94,9 +93,14 @@ class LoginController extends GetxController {
         //
         GetStorage().write('ext', responseApiE.data);
 
-        // GetStorage().write('rest', responseApiR.data);
-        //Restriccion rest = Restriccion.fromJson(GetStorage().read('rest'));
-        //print('ESTE ES T ${responseApiR.data}');
+        Extension ext = Extension.fromJson(GetStorage().read('ext'));
+        String numeroh = '${ext.extension ?? ''}';
+
+        print('Numero 97   ${numeroh}');
+
+        ResponseApi responseApiS = await usersProvider.selectAll(numeroh, urls);
+        GetStorage().write('estado', responseApiS.data);
+        print('ESTE ES estado  ${responseApiS.data}');
         Get.snackbar('Login correcto',
             responseApiU.message ?? ''); // DATOS DEL USUARIO EN SESION
         goToHomePage();

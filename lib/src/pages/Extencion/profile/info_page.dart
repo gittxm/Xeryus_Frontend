@@ -78,7 +78,7 @@ class _pageUpdateState extends State<pageUpdate> {
           children: [
             _textYourExtension(),
             _textYourEstadoExtension(),
-            _textYourNumeroDestino(),
+            // _textYourNumeroDestino(),
             _buttonUpdate(),
           ],
         ),
@@ -135,29 +135,29 @@ class _pageUpdateState extends State<pageUpdate> {
         child: ListTile(
           leading: Icon(Icons.supervised_user_circle),
           title: Text(' Extencion'),
-          subtitle: Text('${con.ext.value.extension ?? ''}'),
+          subtitle: Text('${con.ext0.value.extension ?? ''}'),
         ));
   }
 
-  Widget _textYourNumeroDestino() {
+  /*  Widget _textYourNumeroDestino() {
     return Container(
         margin: EdgeInsets.only(top: 1),
         child: ListTile(
           leading: Icon(Icons.phone),
           title: Text('Numero Extencion'),
-          subtitle: Text(con.ext.value.numeroDestino.toString()),
+          subtitle: Text(con.ext0.value.extension.toString()),
         ));
-  }
+  } */
 
-  Widget _textYourtipoDesvio() {
+/*   Widget _textYourtipoDesvio() {
     return Container(
         margin: EdgeInsets.only(top: 1),
         child: ListTile(
           leading: Icon(Icons.phonelink_lock),
           title: Text('Tipo Desvio'),
-          subtitle: Text('${con.ext.value.tipoDesvio ?? ''}'),
+          subtitle: Text('${con.ext0.value.tipoDesvio ?? ''}'),
         ));
-  }
+  } */
 
   // ignore: unnecessary_string_interpolations
 

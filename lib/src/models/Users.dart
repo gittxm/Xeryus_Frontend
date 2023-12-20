@@ -29,7 +29,7 @@ class User {
         password: json["password"],
         cuentaCorreo: json["cuentaCorreo"],
         idioma: json["idioma"],
-        url :json["url"],
+        url: json["url"],
         sessionToken: json["session_token"],
       );
 

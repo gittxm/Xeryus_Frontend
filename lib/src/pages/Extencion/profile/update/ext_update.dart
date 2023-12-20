@@ -20,9 +20,12 @@ class Item {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
-  //static const menuItemsSalue = <String>['1', '2', '3', '4', '5'];
-  String valueName = con.estado1 ?? '';
+  String valueName = con.estadoA1 ?? '';
   static const menuItemsShow = <Item>[
+    const Item(
+        'Buzon', Icon(Icons.call_end_outlined, color: Colors.deepOrangeAccent)),
+    const Item('No Disponible',
+        Icon(Icons.phone_disabled_sharp, color: Colors.redAccent)),
     const Item(
         'Disponible',
         Icon(
@@ -35,14 +38,6 @@ class _UpdatePageState extends State<UpdatePage> {
           Icons.phone,
           color: Colors.orangeAccent,
         )),
-    const Item('No Disponible',
-        Icon(Icons.phone_disabled_sharp, color: Colors.redAccent)),
-    const Item(
-        'Viaje',
-        Icon(
-          Icons.airplanemode_active_outlined,
-          color: Colors.yellow,
-        )),
     const Item(
         'Oficina',
         Icon(
@@ -54,6 +49,12 @@ class _UpdatePageState extends State<UpdatePage> {
         Icon(
           Icons.home,
           color: Colors.blueAccent,
+        )),
+    const Item(
+        'Viaje',
+        Icon(
+          Icons.airplanemode_active_outlined,
+          color: Colors.yellow,
         )),
   ];
 
@@ -122,7 +123,7 @@ class _UpdatePageState extends State<UpdatePage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            _textFieldNumero(),
+            //_textFieldNumero(),
             //_textFieldEstado(),
             scroll(context),
             _buttonUpdate(),
@@ -132,7 +133,7 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
-  Widget _textFieldNumero() {
+/*   Widget _textFieldNumero() {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 40,
@@ -145,7 +146,7 @@ class _UpdatePageState extends State<UpdatePage> {
             prefixIcon: Icon(Icons.data_usage_rounded)),
       ),
     );
-  }
+  } */
 
   Widget _textFieldEstado() {
     return Container(
@@ -164,7 +165,7 @@ class _UpdatePageState extends State<UpdatePage> {
       width: double.infinity,
       margin: EdgeInsets.symmetric(horizontal: 40, vertical: 40),
       child: ElevatedButton(
-          onPressed: () => con.updateI(),
+          onPressed: () => con.updatep(),
           style: ElevatedButton.styleFrom(
               padding: EdgeInsets.symmetric(vertical: 15)),
           child: Text(
@@ -174,8 +175,7 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
-
-  String _btn1SelectedVal = con.estado1;
+  String _btn1SelectedVal = con.estadoA1;
 
   Widget scroll(BuildContext context) {
     return Container(
@@ -188,14 +188,14 @@ class _UpdatePageState extends State<UpdatePage> {
             onChanged: (Item? newValue) {
               if (newValue != null) {
                 setState(
-                  () => con.estado1 = newValue.name,
+                  () => con.estadoA1 = newValue.name,
                 );
-                print(con.estado1);
+                print(con.estadoA1);
               }
             },
             items: _dropDownMenuItems,
             value: menuItemsShow.firstWhere(
-              (item) => item.name == con.estado1,
+              (item) => item.name == con.estadoA1,
               orElse: () => menuItemsShow[0],
             )),
       ),
