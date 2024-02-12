@@ -12,6 +12,7 @@ class User {
   String? idioma;
   String? url;
   String? sessionToken;
+  String? extension;
 
   User({
     this.id,
@@ -21,16 +22,18 @@ class User {
     this.idioma,
     this.url,
     this.sessionToken,
+    this.extension,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
-        alias: json["alias"],
+        alias: json["alias"].toString(),
         password: json["password"],
         cuentaCorreo: json["cuentaCorreo"],
         idioma: json["idioma"],
         url: json["url"],
         sessionToken: json["session_token"],
+        extension: json["Extension"].toString(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -41,5 +44,6 @@ class User {
         "idioma": idioma,
         "url": url,
         "session_token": sessionToken,
+        "Extension": extension,
       };
 }

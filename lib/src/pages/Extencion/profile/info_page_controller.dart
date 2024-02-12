@@ -3,8 +3,13 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import '../../../models/Extensiones.dart';
 
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:flutter/material.dart';
+import '../../../models/Extensiones.dart';
+
 class ExtensionUpdate extends GetxController {
-  var ext0 = Extension.fromJson(GetStorage().read<List>('estado2')?.firstWhere(
+  var ext0 = Extensionn.fromJson(GetStorage().read<List>('estado')?.firstWhere(
               (element) => element['Activo'] == 1,
               orElse: () => null) ??
           {})
@@ -17,27 +22,27 @@ class ExtensionUpdate extends GetxController {
   String exten() {
     String nEstado = ext0.value.Nombre ?? '';
 
-    switch (ext0.value.Estado) {
+    switch (ext0.value.Nombre) {
       case '0':
-        nEstado = 'Buzon';
+        nEstado = 'BUZON';
         break;
       case '1':
-        nEstado = 'No Disponible';
+        nEstado = 'NO_DISPONIBLE';
         break;
       case '2':
-        nEstado = 'Disponible';
+        nEstado = 'DISPONIBLE';
         break;
       case '3':
-        nEstado = 'Ausente';
+        nEstado = 'AUSENTE';
         break;
       case '4':
-        nEstado = 'Oficina';
+        nEstado = 'OFICINA';
         break;
       case '5':
-        nEstado = 'Casa';
+        nEstado = 'CASA';
         break;
       case '6':
-        nEstado = 'Viaje';
+        nEstado = 'VIAJE';
         break;
     }
     return nEstado;
@@ -95,7 +100,7 @@ class ExtensionUpdate extends GetxController {
 
   void goToInfo() {
     Get.offNamedUntil('/client/update', (route) => false);
-    ext0 = Extension.fromJson(GetStorage().read<List>('estado2')?.firstWhere(
+    ext0 = Extensionn.fromJson(GetStorage().read<List>('estado')?.firstWhere(
                 (element) => element['Activo'] == 1,
                 orElse: () => null) ??
             {})

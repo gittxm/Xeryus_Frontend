@@ -16,7 +16,7 @@ class _MiVistaState extends State<MiVista> {
   }
 
   void _cargarDatos() async {
-    String url = 'http://192.168.3.72:3000/api/users/restriccion';
+    String url = 'http://192.168.3.71:3000/api/users/restriccion';
     Map<String, String> parametros = {'Extension': '1'};
     http.Response respuesta = await http.post(Uri.parse(url), body: parametros);
     setState(() {

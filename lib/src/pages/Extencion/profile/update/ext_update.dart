@@ -20,38 +20,38 @@ class Item {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
-  String valueName = con.estadoA1 ?? '';
+  //String valueName = con.estadoA1 ?? '';
   static const menuItemsShow = <Item>[
     const Item(
-        'Buzon', Icon(Icons.call_end_outlined, color: Colors.deepOrangeAccent)),
-    const Item('No Disponible',
+        'BUZON', Icon(Icons.call_end_outlined, color: Colors.deepOrangeAccent)),
+    const Item('NO_DISPONIBLE',
         Icon(Icons.phone_disabled_sharp, color: Colors.redAccent)),
     const Item(
-        'Disponible',
+        'DISPONIBLE',
         Icon(
           Icons.circle,
           color: const Color(0xFF167F67),
         )),
     const Item(
-        'Ausente',
+        'AUSENTE',
         Icon(
           Icons.phone,
           color: Colors.orangeAccent,
         )),
     const Item(
-        'Oficina',
+        'OFICINA',
         Icon(
           Icons.computer_rounded,
           color: Colors.deepPurple,
         )),
     const Item(
-        'Casa',
+        'CASA',
         Icon(
           Icons.home,
           color: Colors.blueAccent,
         )),
     const Item(
-        'Viaje',
+        'VIAJE',
         Icon(
           Icons.airplanemode_active_outlined,
           color: Colors.yellow,
@@ -78,7 +78,7 @@ class _UpdatePageState extends State<UpdatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        // POSICIONAR ELEMENTOS UNO ENCIMA DEL OTRO
+// POSICIONAR ELEMENTOS UNO ENCIMA DEL OTRO
         children: [
           _backgroundCover(context),
           _boxForm(context),
@@ -123,8 +123,8 @@ class _UpdatePageState extends State<UpdatePage> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            //_textFieldNumero(),
-            //_textFieldEstado(),
+            _textFieldNumero(),
+//_textFieldEstado(),
             scroll(context),
             _buttonUpdate(),
           ],
@@ -133,7 +133,7 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
-/*   Widget _textFieldNumero() {
+  Widget _textFieldNumero() {
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 40,
@@ -146,7 +146,7 @@ class _UpdatePageState extends State<UpdatePage> {
             prefixIcon: Icon(Icons.data_usage_rounded)),
       ),
     );
-  } */
+  }
 
   Widget _textFieldEstado() {
     return Container(
@@ -182,9 +182,9 @@ class _UpdatePageState extends State<UpdatePage> {
       child: ListTile(
         title: const Text('Estado Extension'),
         trailing: DropdownButton<Item>(
-            // Must be one of items.value.
+// Must be one of items.value.
             /// agregar el icono actual con getx .value
-            //     value: ,
+// value: ,
             onChanged: (Item? newValue) {
               if (newValue != null) {
                 setState(

@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:xyrusflutter/src/models/Contratos.dart';
 import 'package:xyrusflutter/src/models/Users.dart';
-
-import '../../models/response_api.dart';
-import '../../provider/contratos_provider.dart';
 
 class HomeController extends GetxController {
   //crear clase para manejar los usuarios de la bdd

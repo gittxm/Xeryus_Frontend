@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:xyrusflutter/src/pages/Extencion/profile/info_page_controller.dart';
 
@@ -78,7 +76,7 @@ class _pageUpdateState extends State<pageUpdate> {
           children: [
             _textYourExtension(),
             _textYourEstadoExtension(),
-            // _textYourNumeroDestino(),
+            _textYourNumeroDestino(),
             _buttonUpdate(),
           ],
         ),
@@ -139,7 +137,7 @@ class _pageUpdateState extends State<pageUpdate> {
         ));
   }
 
-  /*  Widget _textYourNumeroDestino() {
+  Widget _textYourNumeroDestino() {
     return Container(
         margin: EdgeInsets.only(top: 1),
         child: ListTile(
@@ -147,9 +145,9 @@ class _pageUpdateState extends State<pageUpdate> {
           title: Text('Numero Extencion'),
           subtitle: Text(con.ext0.value.extension.toString()),
         ));
-  } */
+  }
 
-/*   Widget _textYourtipoDesvio() {
+  Widget _textYourtipoDesvio() {
     return Container(
         margin: EdgeInsets.only(top: 1),
         child: ListTile(
@@ -157,7 +155,7 @@ class _pageUpdateState extends State<pageUpdate> {
           title: Text('Tipo Desvio'),
           subtitle: Text('${con.ext0.value.tipoDesvio ?? ''}'),
         ));
-  } */
+  }
 
   // ignore: unnecessary_string_interpolations
 

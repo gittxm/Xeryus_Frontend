@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:xyrusflutter/src/models/Restriccion.dart';
 import 'package:xyrusflutter/src/models/Users.dart';
 import 'package:xyrusflutter/src/models/response_api.dart';
 import 'package:xyrusflutter/src/pages/Extencion/profile/info_page_controller.dart';
@@ -11,19 +12,27 @@ import '../../../../models/Extensiones.dart';
 import '../../extension_controller.dart';
 
 class updateController extends GetxController {
-  Extension ext = Extension.fromJson(GetStorage().read('ext') ?? {});
+  //Extensionn ext = Extensionn.fromJson(GetStorage().read('ext') ?? {});
+  var ext5 = Extensionn.fromJson(GetStorage().read<List>('estado')?.firstWhere(
+              (element) => element['Activo'] == 1,
+              orElse: () => null) ??
+          {})
+      .obs;
   TextEditingController estController = TextEditingController();
   TextEditingController numberController = TextEditingController();
-  //*
-  String estadoA1 = "Activo";
+//*
+  //late String estadoA1 = '${ext5.value.Nombre ?? ''}';
+  //late String estadoN = '${ext5.value.Estado ?? ''}';
+  String estadoA1 = "";
   String estadoN = "";
   UsersProvider usersProvider = UsersProvider();
   ClientProfileInfoController con = Get.put(ClientProfileInfoController());
   ExtensionUpdate up = Get.put(ExtensionUpdate());
   ExtensionUpdate extensionUpdate = Get.find();
+//poner un proces dialog CON UN IF QUE VALIDA LA INFO
   updateController() {
-    numberController.text = ext.numeroDestino ?? '';
-    estController.text = ext.Estado ?? '';
+    numberController.text = ext5.value.NumeroTelefonico ?? '';
+    estController.text = ext5.value.Estado ?? '';
   }
 
   void updatep() async {
@@ -47,7 +56,7 @@ class updateController extends GetxController {
         estadoN = "3";
         break;
       case 'Oficina':
-        print('El estado es Oficina  ');
+        print('El estado es Oficina ');
         estadoN = "4";
         break;
 
@@ -60,6 +69,8 @@ class updateController extends GetxController {
         estadoN = "6";
         break;
     }
+    print("prueba1" + ext5.value.NumeroTelefonico.toString());
+    print("prueba2" + ext5.value.Estado.toString());
 
     User userT = User.fromJson(GetStorage().read('user'));
 
@@ -68,34 +79,59 @@ class updateController extends GetxController {
     String estado = estadoN;
     String number = numberController.text;
 
-    Extension ext3 = Extension.fromJson(GetStorage().read('ext'));
+    Extensionn ext3 = Extensionn.fromJson(GetStorage().read('ext'));
 
     String ext2 = '${ext3.extension ?? ''}';
 
-    Extension myUser = Extension(
-      Estado: ext.Estado,
+    Extensionn myUser = Extensionn(
+      Estado: ext5.value.Estado,
     );
 
     Contratos contratos = Contratos.fromJson(GetStorage().read("contratos"));
     String urls = contratos.url ?? '';
+/*
+ResponseApi responseApi =
+await usersProvider.update(urls,'${estado ?? ''}', '${numero ?? ''}');
+*/
 
-    //si el numero vacio no mandar conf
+    ResponseApi responseApi3 =
+        await usersProvider.restriccion(urls, '${con.ext1.value.extension}');
+    GetStorage().write('rest', responseApi3.data);
+    print(responseApi3.data);
+    Restriccion rest = Restriccion.fromJson(GetStorage().read('rest'));
+
+    String prefijo = '${rest.prefijo ?? ''}';
+    print('prefijo ss ${prefijo}');
+
+    RegExp patron = RegExp(r'^9\d{9}$');
+
+    if (number.startsWith(prefijo)) {
+      ResponseApi responseApi2 = await usersProvider.updateN(
+          urls, '${number ?? ''}', '${numero ?? ''}');
+      print(responseApi2.message);
+      Get.snackbar('Si Se Puede', number);
+    } else {
+      print("El Número De Teléfono Es Inválido.");
+      Get.snackbar('Numero Incorrecto Agregar al inicio $prefijo', number);
+    }
+//si el numero vacio no mandar conf
     ResponseApi responsedata1 =
         await UsersProvider().UPDATE('${ext2 ?? ''}', urls, estado);
     if (responsedata1.success == true) {
       GetStorage().write('ext3', responsedata1.message);
-      //extensionUpdate.ext1.value = Extension.fromJson(responsedata1.data);
+//extensionUpdate.ext1.value = Extension.fromJson(responsedata1.data);
 
-      print('response api UPDATE  ${responsedata1.message}');
-      print('EXTUP  ${extensionUpdate.ext0.value}');
-      print('extencion' '${con.ext1.extension}');
-      print('Estado' '${con.ext1.estadoExtension}');
+      print('response api UPDATE ${responsedata1.message}');
+      print('EXTUP ${extensionUpdate.ext0.value}');
+      print('Estado de pagina 1 ${extensionUpdate.ext0.value.Estado}');
+      print('extencion' '${con.ext1.value.extension}');
+      print('Estado' '${con.ext1.value.Estado}');
     }
-    Extension ext9 = Extension.fromJson(GetStorage().read('ext'));
+    Extensionn ext9 = Extensionn.fromJson(GetStorage().read('ext'));
     String numeroh = '${ext9.extension ?? ''}';
 
     ResponseApi responseApiS = await usersProvider.selectAll(numeroh, urls);
-    GetStorage().write('estado2', responseApiS.data);
+    GetStorage().write('estado5', responseApiS.data);
     print('Estado extencion ${estado}');
     print('numero ${number}');
   }

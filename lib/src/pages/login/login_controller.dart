@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -7,7 +6,6 @@ import 'package:xyrusflutter/src/models/Contratos.dart';
 import 'package:xyrusflutter/src/models/Extensiones.dart';
 
 import '../../models/Users.dart';
-import '../../models/Restriccion.dart';
 import '../../models/response_api.dart';
 import '../../provider/contratos_provider.dart';
 
@@ -84,23 +82,29 @@ class LoginController extends GetxController {
       if (responseApiU.success == true) {
         GetStorage().write('user', responseApiU.data);
 
-        User userT = User.fromJson(GetStorage().read('user'));
+        User userTS = User.fromJson(GetStorage().read('user'));
+        String id = '${userTS.id ?? ''}';
+        print('id  ${id}');
+        ResponseApi responseApiF = await usersProvider.extension1(id, urls);
+        GetStorage().write('user', responseApiF.data);
 
-        String numero = '${userT.id ?? ''}';
+        Extensionn exten = Extensionn.fromJson(GetStorage().read('user'));
+        String extension = '${exten.Numero ?? ''}';
+        //String extensionr = '${exten.Usuario ?? ''}';
+        print('exte  ${extension}');
 
-        ResponseApi responseApiE = await usersProvider.extension(numero, urls);
-
-        //
+        ResponseApi responseApiE =
+            await usersProvider.extension(extension, urls);
         GetStorage().write('ext', responseApiE.data);
+        print('ESTE ES estado  ${responseApiE.data}');
 
-        Extension ext = Extension.fromJson(GetStorage().read('ext'));
-        String numeroh = '${ext.extension ?? ''}';
-
+        Extensionn ext = Extensionn.fromJson(GetStorage().read('ext'));
+        String numeroh = '${ext.Extension ?? ''}';
         print('Numero 97   ${numeroh}');
 
         ResponseApi responseApiS = await usersProvider.selectAll(numeroh, urls);
         GetStorage().write('estado', responseApiS.data);
-        print('ESTE ES estado  ${responseApiS.data}');
+
         Get.snackbar('Login correcto',
             responseApiU.message ?? ''); // DATOS DEL USUARIO EN SESION
         goToHomePage();

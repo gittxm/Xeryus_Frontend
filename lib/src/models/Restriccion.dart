@@ -2,7 +2,7 @@
 //
 // final restriccion = restriccionFromJson(jsonString);
 
-/* import 'dart:convert';
+import 'dart:convert';
 
 Restriccion restriccionFromJson(String str) =>
     Restriccion.fromJson(json.decode(str));
@@ -24,4 +24,3 @@ class Restriccion {
         "Prefijo": prefijo,
       };
 }
- */
