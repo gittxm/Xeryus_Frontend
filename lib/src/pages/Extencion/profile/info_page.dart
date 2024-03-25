@@ -5,7 +5,8 @@ import 'package:xyrusflutter/src/pages/Extencion/profile/info_page_controller.da
 import '../extension_controller.dart';
 
 ExtensionUpdate up = Get.put(ExtensionUpdate());
-ClientProfileInfoController sig = Get.put(ClientProfileInfoController());
+ExtensionUpdate sig = Get.put(ExtensionUpdate());
+//ClientProfileInfoController sig = Get.put(ClientProfileInfoController());
 
 class pageUpdate extends StatefulWidget {
   const pageUpdate({super.key});
@@ -133,7 +134,7 @@ class _pageUpdateState extends State<pageUpdate> {
         child: ListTile(
           leading: Icon(Icons.supervised_user_circle),
           title: Text(' Extencion'),
-          subtitle: Text('${con.ext0.value.extension ?? ''}'),
+          subtitle: Text('${con.ext0.value.Extension ?? ''}'),
         ));
   }
 
@@ -143,7 +144,7 @@ class _pageUpdateState extends State<pageUpdate> {
         child: ListTile(
           leading: Icon(Icons.phone),
           title: Text('Numero Extencion'),
-          subtitle: Text(con.ext0.value.extension.toString()),
+          subtitle: Text(con.ext0.value.NumeroTelefonico.toString()),
         ));
   }
 

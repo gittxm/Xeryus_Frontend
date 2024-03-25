@@ -3,11 +3,6 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter/material.dart';
 import '../../../models/Extensiones.dart';
 
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:flutter/material.dart';
-import '../../../models/Extensiones.dart';
-
 class ExtensionUpdate extends GetxController {
   var ext0 = Extensionn.fromJson(GetStorage().read<List>('estado')?.firstWhere(
               (element) => element['Activo'] == 1,
@@ -22,7 +17,7 @@ class ExtensionUpdate extends GetxController {
   String exten() {
     String nEstado = ext0.value.Nombre ?? '';
 
-    switch (ext0.value.Nombre) {
+    switch (ext0.value.Estado) {
       case '0':
         nEstado = 'BUZON';
         break;
@@ -105,5 +100,19 @@ class ExtensionUpdate extends GetxController {
                 orElse: () => null) ??
             {})
         .obs;
+  }
+
+  void signOut() {
+    GetStorage()
+        .erase(); /* 
+    GetStorage().remove('user');
+    GetStorage().remove('ext');
+    GetStorage().remove('ext3');
+    GetStorage().remove('urls');
+    GetStorage().remove('estado');
+    GetStorage().remove('contratos');
+    GetStorage().remove('rest'); */
+
+    Get.offNamedUntil('/', (route) => false);
   }
 }

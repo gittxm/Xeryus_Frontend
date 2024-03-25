@@ -4,9 +4,9 @@ import 'package:xyrusflutter/src/models/Users.dart';
 import 'package:xyrusflutter/src/models/Extensiones.dart';
 import '../../provider/contratos_provider.dart';
 
-class ClientProfileInfoController extends GetxController {
-  var user = User.fromJson(GetStorage().read('user')).obs;
-  //Extensionn ext = Extensionn.fromJson(GetStorage().read('ext') ?? {});
+//class ClientProfileInfoController extends GetxController {
+  /* var user = User.fromJson(GetStorage().read('user')).obs; */
+  /*  //Extensionn ext = Extensionn.fromJson(GetStorage().read('ext') ?? {});
   var ext1 = Extensionn.fromJson(GetStorage().read<List>('estado')?.firstWhere(
               (element) => element['Activo'] == 1,
               orElse: () => null) ??
@@ -18,16 +18,20 @@ class ClientProfileInfoController extends GetxController {
 
   exten() {
     //eliminar
-    String estadoN = ext1.value.Estado.toString() ?? '';
+    String estadoN = ext1.value.Nombre.toString() ?? '';
 
     switch (ext1.value.Nombre) {
+      case '0':
+        print('BUZON');
+        estadoN = "BUZON";
+        break;
       case '1':
         print('Disponible');
-        estadoN = "Disponible";
+        estadoN = "NO_DISPONIBLE";
         break;
       case '2':
         print('El estado es 2  ');
-        estadoN = "2";
+        estadoN = "DISPONIBLE";
         break;
       case '3':
         print('El estado es 3  ');
@@ -35,16 +39,16 @@ class ClientProfileInfoController extends GetxController {
         break;
       case '4':
         print('El estado es 4  ');
-        estadoN = "Viaje";
+        estadoN = "OFICINA";
         break;
       case '5':
         print('El estado es  5  ');
-        estadoN = "Oficina";
+        estadoN = "CASA";
         break;
 
       case '6':
         print('El estado es  6 ');
-        estadoN = "Casa";
+        estadoN = "VIAJE";
         break;
     }
     return estadoN;
@@ -52,18 +56,8 @@ class ClientProfileInfoController extends GetxController {
     //print('usuario extension ${ext.toJson}');
     print('usuario extension ${ext1.value.Estado}');
   }
+ */
+  //void goToUpdate() {}
 
-  void goToUpdate() {}
-
-  void signOut() {
-    GetStorage().remove('user');
-    GetStorage().remove('ext');
-    GetStorage().remove('ext3');
-    GetStorage().remove('urls');
-    GetStorage().remove('estado');
-    GetStorage().remove('ext0');
-    GetStorage().remove('Activo');
-
-    Get.offNamedUntil('/', (route) => false);
-  }
-}
+  
+//}

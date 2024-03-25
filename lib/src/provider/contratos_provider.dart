@@ -121,12 +121,14 @@ class UsersProvider extends GetConnect {
     }
   }
 
-  Future<ResponseApi> UPDATE(String id, String urls, String estadoB) async {
+  Future<ResponseApi> UPDATE(
+      String id, String urls, String estado1, String estado2) async {
     print("id" + id);
-    print("estado" + estadoB);
+    print("estado" + estado1);
     Response response = await put('$url3/api/users/updateestados', {
-      'extension': id,
-      'estado': estadoB,
+      'Extension': id,
+      'Estado': estado1,
+      'Estado2': estado2,
       'urls': urls,
     }, headers: {
       'Content-Type': 'application/json'
@@ -142,7 +144,7 @@ class UsersProvider extends GetConnect {
     return responsedata;
   }
 
-  Future<ResponseApi> updateN(String urls, String Numero, String id) async {
+  /* Future<ResponseApi> updateN(String urls, String Numero, String id) async {
     Response response = await put('$url3/api/users/updateN', {
       'NumeroDestino': Numero,
       'id': id,
@@ -161,9 +163,9 @@ class UsersProvider extends GetConnect {
     ResponseApi responseApi = ResponseApi.fromJson(response.body);
     Get.snackbar('Se actualiso correctamente', 'Actualizado correctamente');
     return responseApi;
-  }
+  } */
 
-  Future<ResponseApi> restriccion(String urls, String id) async {
+  /* Future<ResponseApi> restriccion(String urls, String id) async {
     Response response = await post('$url3/api/users/restriccion', {
       'Extension': id,
       'urls': urls
@@ -181,5 +183,5 @@ class UsersProvider extends GetConnect {
     ResponseApi responseApi = ResponseApi.fromJson(response.body);
     Get.snackbar('funciona restriccion', 'funciona restriccion');
     return responseApi;
-  }
+  } */
 }

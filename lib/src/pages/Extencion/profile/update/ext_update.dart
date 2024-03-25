@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:xyrusflutter/src/pages/Extencion/profile/info_page_controller.dart';
 import 'package:xyrusflutter/src/pages/Extencion/profile/update/ext_update_controller.dart';
 
-updateController con = Get.put(updateController());
-ExtensionUpdate up = Get.put(ExtensionUpdate());
+import '../../../../models/Extensiones.dart';
 
 class UpdatePage extends StatefulWidget {
   const UpdatePage({super.key});
@@ -20,6 +20,9 @@ class Item {
 }
 
 class _UpdatePageState extends State<UpdatePage> {
+  updateController con = Get.put(updateController());
+  ExtensionUpdate up = Get.put(ExtensionUpdate());
+
   //String valueName = con.estadoA1 ?? '';
   static const menuItemsShow = <Item>[
     const Item(
@@ -76,6 +79,10 @@ class _UpdatePageState extends State<UpdatePage> {
 
   @override
   Widget build(BuildContext context) {
+    print('Estado seleccionado almacenado: ${con.estadoA1}');
+    print('NUMERO TEL almacenado: ${con.numberController}');
+    //print('Nuevos datos: ${con.ext5.value.data}');
+
     return Scaffold(
       body: Stack(
 // POSICIONAR ELEMENTOS UNO ENCIMA DEL OTRO
@@ -148,7 +155,7 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
-  Widget _textFieldEstado() {
+  /* Widget _textFieldEstado() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 40),
       child: TextField(
@@ -158,7 +165,7 @@ class _UpdatePageState extends State<UpdatePage> {
             InputDecoration(hintText: 'Estado', prefixIcon: Icon(Icons.person)),
       ),
     );
-  }
+  } */
 
   Widget _buttonUpdate() {
     return Container(
@@ -175,30 +182,47 @@ class _UpdatePageState extends State<UpdatePage> {
     );
   }
 
-  String _btn1SelectedVal = con.estadoA1;
+  //String _btn1SelectedVal = con.estadoA1;
 
   Widget scroll(BuildContext context) {
     return Container(
       child: ListTile(
         title: const Text('Estado Extension'),
         trailing: DropdownButton<Item>(
-// Must be one of items.value.
-            /// agregar el icono actual con getx .value
-// value: ,
-            onChanged: (Item? newValue) {
-              if (newValue != null) {
-                setState(
-                  () => con.estadoA1 = newValue.name,
-                );
-                print(con.estadoA1);
-              }
-            },
-            items: _dropDownMenuItems,
-            value: menuItemsShow.firstWhere(
-              (item) => item.name == con.estadoA1,
-              orElse: () => menuItemsShow[0],
-            )),
+          value: menuItemsShow.firstWhere(
+            (item) => item.name == con.estadoA1,
+            orElse: () => menuItemsShow[0],
+          ),
+          onChanged: (Item? newValue) {
+            if (newValue != null) {
+              setState(() {
+                con.estadoA1 = newValue.name;
+              });
+              print(con.estadoA1);
+            }
+          },
+          items: menuItemsShow.map((Item item) {
+            return DropdownMenuItem<Item>(
+              value: item,
+              child: Row(
+                children: [
+                  item.icon,
+                  SizedBox(width: 8),
+                  Text(item.name),
+                ],
+              ),
+            );
+          }).toList(),
+        ),
       ),
     );
+  }
+
+  void main() {
+    runApp(MaterialApp(
+      home: Scaffold(
+        body: UpdatePage(),
+      ),
+    ));
   }
 }
